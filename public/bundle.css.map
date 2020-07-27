@@ -1,0 +1,12 @@
+{
+  "version": 3,
+  "file": "bundle.css",
+  "sources": [
+    "../Home.svelte"
+  ],
+  "sourcesContent": [
+    "<script context=\"module\">\n  import gql from 'graphql-tag';\n  import { client } from '../apollo';\n  \n  const ADD_PATIENT = gql`\n    mutation($appointmentTime: String!) {\n      addPatient(patientInput: {appointmentTime: $appointmentTime}){\n        id\n      }\n    }\n  `;\n  \n</script>\n<script>\n  import { restore, mutate, query } from 'svelte-apollo';\n  let appointmentTime = '';\n  \n  async function addPatient(e) {\n    try {\n      const res = await mutate(client, {\n        mutation: ADD_PATIENT,\n        variables: { appointmentTime }\n      });\n      console.log(res)\n    } catch(error) {\n      console.error(error);\n    }\n  }\n</script>\n\n<main>\n  <form on:submit|preventDefault={addPatient}>\n    <label for=\"appointmentTime\">Appointment Time</label>\n    <input type=\"text\" bind:value={appointmentTime} />\n    <button type=\"submit\">Add Patient</button>\n  </form>\n  \n</main>\n\n\n<style>\nmain {\n  width: 100%;\n}\n</style>"
+  ],
+  "names": [],
+  "mappings": "AAyCA,IAAI,eAAC,CAAC,AACJ,KAAK,CAAE,IAAI,AACb,CAAC"
+}
