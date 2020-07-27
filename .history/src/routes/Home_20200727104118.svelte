@@ -17,11 +17,11 @@
   
   async function addPatient(e) {
     try {
-      await mutate(client, {
+      const res = await mutate(client, {
         mutation: ADD_PATIENT,
         variables: { appointmentTime }
       });
-      navigate("/", { replace: true });
+      console.log(res)
     } catch(error) {
       console.error(error);
     }

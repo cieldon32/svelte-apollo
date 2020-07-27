@@ -17,7 +17,7 @@
   
   async function onRegister(e) {
     try {
-      await mutate(client, {
+      const res = await mutate(client, {
         mutation: REGISTER,
         variables: { name, role, password}
       });
